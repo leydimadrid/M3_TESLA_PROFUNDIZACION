@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v9.0": {
       "TeslaACDC.API/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.OpenApi": "9.0.0"
+          "Microsoft.AspNetCore.OpenApi": "9.0.0",
+          "TeslaACDC.Business": "1.0.0",
+          "TeslaACDC.Data": "1.0.0"
         },
         "runtime": {
           "TeslaACDC.API.dll": {}
@@ -30,6 +32,25 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
             "assemblyVersion": "1.6.17.0",
             "fileVersion": "1.6.17.0"
+          }
+        }
+      },
+      "TeslaACDC.Business/1.0.0": {
+        "dependencies": {
+          "TeslaACDC.Data": "1.0.0"
+        },
+        "runtime": {
+          "TeslaACDC.Business.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "TeslaACDC.Data/1.0.0": {
+        "runtime": {
+          "TeslaACDC.Data.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -54,6 +75,16 @@
       "sha512": "sha512-Le+kehlmrlQfuDFUt1zZ2dVwrhFQtKREdKBo+rexOwaCoYP0/qpgT9tLxCsZjsgR5Itk1UKPcbgO+FyaNid/bA==",
       "path": "microsoft.openapi/1.6.17",
       "hashPath": "microsoft.openapi.1.6.17.nupkg.sha512"
+    },
+    "TeslaACDC.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TeslaACDC.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

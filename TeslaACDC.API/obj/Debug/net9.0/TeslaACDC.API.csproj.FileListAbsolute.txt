@@ -31,3 +31,8 @@ C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\obj\Debug\net9.0\refint\TeslaACDC.API.d
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\obj\Debug\net9.0\TeslaACDC.API.pdb
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\obj\Debug\net9.0\TeslaACDC.API.genruntimeconfig.cache
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\obj\Debug\net9.0\ref\TeslaACDC.API.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\obj\Debug\net9.0\TeslaACDC.API.sourcelink.json
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\TeslaACDC.Business.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\TeslaACDC.Business.pdb
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\TeslaACDC.Data.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\TeslaACDC.Data.pdb

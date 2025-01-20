@@ -1,0 +1,18 @@
+meta {
+  name: Post Calcular Area Triangulo
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:5046/api/tesla/calcularareatriangulo
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "base": 10,
+    "altura": 10
+  }
+}

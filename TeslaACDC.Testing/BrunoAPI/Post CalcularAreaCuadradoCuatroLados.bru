@@ -1,0 +1,20 @@
+meta {
+  name: Post CalcularAreaCuadradoCuatroLados
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:5046/api/tesla/areacuadradocuatrolados
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "lado1": 20,
+    "lado2": 20,
+    "lado3": 20,
+    "lado4": 20
+  }
+}

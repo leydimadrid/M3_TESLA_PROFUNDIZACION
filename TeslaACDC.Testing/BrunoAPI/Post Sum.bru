@@ -1,0 +1,18 @@
+meta {
+  name: Post Sum
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5046/api/tesla/sum
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "value1": 20,
+    "value2": 7
+  }
+}

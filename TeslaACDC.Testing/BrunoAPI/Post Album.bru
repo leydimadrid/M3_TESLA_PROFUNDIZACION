@@ -1,0 +1,19 @@
+meta {
+  name: Post Album
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:5046/api/tesla/postalbum
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "Album Nuevo",
+    "anio": 1999,
+    "genero": "Urbano"
+  }
+}

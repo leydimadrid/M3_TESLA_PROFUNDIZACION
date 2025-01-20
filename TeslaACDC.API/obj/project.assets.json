@@ -33,6 +33,29 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "TeslaACDC.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "TeslaACDC.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TeslaACDC.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TeslaACDC.Business.dll": {}
+        }
+      },
+      "TeslaACDC.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/TeslaACDC.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TeslaACDC.Data.dll": {}
+        }
       }
     }
   },
@@ -67,16 +90,27 @@
         "microsoft.openapi.1.6.17.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "TeslaACDC.Business/1.0.0": {
+      "type": "project",
+      "path": "../TeslaACDC.Business/TeslaACDC.Business.csproj",
+      "msbuildProject": "../TeslaACDC.Business/TeslaACDC.Business.csproj"
+    },
+    "TeslaACDC.Data/1.0.0": {
+      "type": "project",
+      "path": "../TeslaACDC.Data/TeslaACDC.Data.csproj",
+      "msbuildProject": "../TeslaACDC.Data/TeslaACDC.Data.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.AspNetCore.OpenApi >= 9.0.0"
+      "Microsoft.AspNetCore.OpenApi >= 9.0.0",
+      "TeslaACDC.Business >= 1.0.0",
+      "TeslaACDC.Data >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Janus\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Janus\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -87,25 +121,26 @@
       "packagesPath": "C:\\Users\\Janus\\.nuget\\packages\\",
       "outputPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Janus\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Janus\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj": {
+              "projectPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj"
+            },
+            "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Data\\TeslaACDC.Data.csproj": {
+              "projectPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Data\\TeslaACDC.Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -148,7 +183,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
