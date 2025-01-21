@@ -1,6 +1,6 @@
-namespace TeslaACDC.Data.Models;
+namespace TeslaACDC.Data.DTO;
 
-public class AreaCuadradoCuatroLados
+public struct AreaCuadradoCuatroLados
 {
     public float Lado1 { get; set; }
     public float Lado2 { get; set; }

@@ -1,8 +1,8 @@
 using System;
 
-namespace TeslaACDC.Data.Models;
+namespace TeslaACDC.Data.DTO;
 
-public class AreaTriangulo
+public struct AreaTriangulo
 {
     public float Base { get; set; }
     public float Altura { get; set; }

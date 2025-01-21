@@ -1,5 +1,5 @@
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.Models;
+using TeslaACDC.Data.DTO;
 
 namespace TeslaACDC.Business.Services;
 

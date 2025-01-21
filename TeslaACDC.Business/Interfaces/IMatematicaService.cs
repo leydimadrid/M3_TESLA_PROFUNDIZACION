@@ -1,12 +1,12 @@
 using System;
-using TeslaACDC.Data.Models;
+using TeslaACDC.Data.DTO;
 
 namespace TeslaACDC.Business.Interfaces;
 
 public interface IMatematicaService
 {
-    Task<string> Sum(SumRequest sumRequest);
-    Task<string> AreaCuadrado(AreaCuadrado areaCuadrado);
-    Task<string> AreaTriangulo(AreaTriangulo areaTriangulo);
-    Task<string> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados areaCuadradoCuatroLados);
+    Task<double> Sum(Sum sum);
+    Task<double> AreaCuadrado(AreaCuadrado areaCuadrado);
+    Task<double> AreaTriangulo(AreaTriangulo areaTriangulo);
+    Task<double> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados areaCuadradoCuatroLados);
 }

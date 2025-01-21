@@ -1,31 +1,39 @@
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.Models;
+using TeslaACDC.Data.DTO;
 
 namespace TeslaACDC.Business.Services;
 
 public class MatematicaService : IMatematicaService
 {
-    public async Task<string> AreaCuadrado(AreaCuadrado areaCuadrado)
+    public async Task<double> AreaCuadrado(AreaCuadrado areaCuadrado)
     {
-        double resultado = areaCuadrado.CalcularArea();
-        return await Task.FromResult($"🟥 El área del cuadrado es: {resultado}");
+        double resultado = areaCuadrado.Lado * areaCuadrado.Lado;
+        return resultado;
     }
 
-    public async Task<string> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados areaCuadradoCuatroLados)
+    public async Task<double> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados lado)
     {
-        double resultado = areaCuadradoCuatroLados.CalcularArea();
-        return await Task.FromResult($"🟥 El área del cuadrado es: {resultado}");
+        if (lado.Lado1 == lado.Lado2 && lado.Lado2
+            == lado.Lado3 && lado.Lado3 == lado.Lado4)
+        {
+            double resultado = lado.Lado1 * lado.Lado1;
+            return resultado;
+        }
+        else
+        {
+            throw new InvalidOperationException("Todos los lados de un cuadrado deben ser iguales.");
+        }
     }
 
-    public async Task<string> AreaTriangulo(AreaTriangulo areaTriangulo)
+    public async Task<double> AreaTriangulo(AreaTriangulo areaTriangulo)
     {
-        double resultado = areaTriangulo.CalcularArea();
-        return await Task.FromResult($"🔺El área del triángulo es: {resultado}");
+        double resultado = areaTriangulo.Base * areaTriangulo.Altura / 2;
+        return resultado;
     }
 
-    public async Task<string> Sum(SumRequest sumRequest)
+    public async Task<double> Sum(Sum sum)
     {
-        double resultado = sumRequest.Sum();
-        return await Task.FromResult($"➕ La suma de {sumRequest.Value1} y {sumRequest.Value2} es: {resultado}");
+        double resultado = sum.Value1 + sum.Value2;
+        return resultado;
     }
 }

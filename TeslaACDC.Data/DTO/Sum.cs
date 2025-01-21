@@ -1,8 +1,8 @@
 using System;
 
-namespace TeslaACDC.Data.Models;
+namespace TeslaACDC.Data.DTO;
 
-public class SumRequest
+public struct Sum
 {
     public float Value2 { get; set; }
     public float Value1 { get; set; }

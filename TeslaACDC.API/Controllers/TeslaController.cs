@@ -3,7 +3,7 @@ namespace TeslaACDC.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using TeslaACDC.Business.Interfaces;
 using TeslaACDC.Business.Services;
-using TeslaACDC.Data.Models;
+using TeslaACDC.Data.DTO;
 
 
 [ApiController] // @Controller
@@ -38,10 +38,10 @@ public class TeslaController : ControllerBase
 
     [HttpPost]
     [Route("Sum")]
-    public async Task<IActionResult> Sum(SumRequest sumRequest)
+    public async Task<IActionResult> Sum(Sum sum)
     {
-        var resultado = await _matematicaService.Sum(sumRequest);
-        return Ok(resultado);
+        var resultado = await _matematicaService.Sum(sum);
+        return Ok("➕ La suma de " + sum.Value1 + " y " + sum.Value2 + " es: " + resultado);
     }
 
     [HttpPost]
@@ -49,15 +49,15 @@ public class TeslaController : ControllerBase
     public async Task<IActionResult> CalcularAreaCuadrado(AreaCuadrado areaCuadrado)
     {
         var resultado = await _matematicaService.AreaCuadrado(areaCuadrado);
-        return Ok(resultado);
+        return Ok("🟥 El área del cuadrado es: " + resultado);
     }
 
     [HttpPost]
     [Route("AreaCuadradoCuatroLados")]
-    public async Task<IActionResult> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados areaCuadradoCuatroLados)
+    public async Task<IActionResult> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados lado)
     {
-        var resultado = await _matematicaService.AreaCuadradoCuatroLados(areaCuadradoCuatroLados);
-        return Ok(resultado);
+        var resultado = await _matematicaService.AreaCuadradoCuatroLados(lado);
+        return Ok("🟥 El área del cuadrado es: " + resultado);
     }
 
     [HttpPost]
@@ -67,7 +67,7 @@ public class TeslaController : ControllerBase
         try
         {
             var resultado = await _matematicaService.AreaTriangulo(areaTriangulo);
-            return Ok(resultado);
+            return Ok("🔺El área del triángulo es: " + resultado);
         }
         catch (InvalidOperationException ex)
         {
