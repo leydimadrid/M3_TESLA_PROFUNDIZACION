@@ -1,0 +1,16 @@
+meta {
+  name: GetAlbumByRangeYear
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost:5046/api/tesla/getalbumbyrangeyear?year1=2010&year2=2015
+  body: none
+  auth: none
+}
+
+params:query {
+  year1: 2010
+  year2: 2015
+}

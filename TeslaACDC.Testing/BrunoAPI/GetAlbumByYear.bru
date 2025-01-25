@@ -1,0 +1,15 @@
+meta {
+  name: GetAlbumByYear
+  type: http
+  seq: 10
+}
+
+get {
+  url: http://localhost:5046/api/tesla/getalbumbyyear?year=2020
+  body: none
+  auth: none
+}
+
+params:query {
+  year: 2020
+}

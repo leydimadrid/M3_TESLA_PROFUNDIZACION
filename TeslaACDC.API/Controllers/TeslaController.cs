@@ -11,12 +11,11 @@ using TeslaACDC.Data.DTO;
 public class TeslaController : ControllerBase
 {
     private readonly IAlbumService _albumService;
-    private readonly IMatematicaService _matematicaService;
+    // private readonly IMatematicaService _matematicaService;
 
-    public TeslaController(IAlbumService albumService, IMatematicaService matematicaService)
+    public TeslaController(IAlbumService albumService)
     {
         _albumService = albumService;
-        _matematicaService = matematicaService;
     }
 
 
@@ -28,52 +27,92 @@ public class TeslaController : ControllerBase
         return Ok(lista);
     }
 
-    [HttpPost]
-    [Route("PostAlbum")]
-    public async Task<IActionResult> ArrayAlbums(Album album)
+    [HttpGet]
+    [Route("GetAlbumId")]
+    public async Task<IActionResult> FindById(int id)
     {
-        var lista = await _albumService.AddAlbums(album);
-        return Ok(lista);
+        var lista = await _albumService.FindById(id);
+        return StatusCode((int)lista.StatusCode, lista);
     }
 
-    [HttpPost]
-    [Route("Sum")]
-    public async Task<IActionResult> Sum(Sum sum)
+    [HttpGet]
+    [Route("GetAlbumByName")]
+    public async Task<IActionResult> FindByName(string name)
     {
-        var resultado = await _matematicaService.Sum(sum);
-        return Ok("➕ La suma de " + sum.Value1 + " y " + sum.Value2 + " es: " + resultado);
+        var lista = await _albumService.FindByName(name);
+        return StatusCode((int)lista.StatusCode, lista);
     }
 
-    [HttpPost]
-    [Route("CalcularAreaCuadrado")]
-    public async Task<IActionResult> CalcularAreaCuadrado(AreaCuadrado areaCuadrado)
+    [HttpGet]
+    [Route("GetAlbumByYear")]
+    public async Task<IActionResult> FindByYear(int year)
     {
-        var resultado = await _matematicaService.AreaCuadrado(areaCuadrado);
-        return Ok("🟥 El área del cuadrado es: " + resultado);
+        var lista = await _albumService.FindByYear(year);
+        return StatusCode((int)lista.StatusCode, lista);
     }
 
-    [HttpPost]
-    [Route("AreaCuadradoCuatroLados")]
-    public async Task<IActionResult> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados lado)
+    [HttpGet]
+    [Route("GetAlbumByRangeYear")]
+    public async Task<IActionResult> FindByRangeYear(int year1, int year2)
     {
-        var resultado = await _matematicaService.AreaCuadradoCuatroLados(lado);
-        return Ok("🟥 El área del cuadrado es: " + resultado);
+        var lista = await _albumService.FindByRangeYear(year1, year2);
+        return StatusCode((int)lista.StatusCode, lista);
     }
 
-    [HttpPost]
-    [Route("CalcularAreaTriangulo")]
-    public async Task<IActionResult> CalcularAreaTriangulo(AreaTriangulo areaTriangulo)
+    [HttpGet]
+    [Route("GetAlbumByNameArtist")]
+    public async Task<IActionResult> FindByNameArtist(string artist)
     {
-        try
-        {
-            var resultado = await _matematicaService.AreaTriangulo(areaTriangulo);
-            return Ok("🔺El área del triángulo es: " + resultado);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-
+        var lista = await _albumService.FindByNameArtist(artist);
+        return StatusCode((int)lista.StatusCode, lista);
     }
+
+    // [HttpPost]
+    // [Route("PostAlbum")]
+    // public async Task<IActionResult> ArrayAlbums(Album album)
+    // {
+    //     var lista = await _albumService.AddAlbums(album);
+    //     return Ok(lista);
+    // }
+
+    // [HttpPost]
+    // [Route("Sum")]
+    // public async Task<IActionResult> Sum(Sum sum)
+    // {
+    //     var resultado = await _matematicaService.Sum(sum);
+    //     return Ok("➕ La suma de " + sum.Value1 + " y " + sum.Value2 + " es: " + resultado);
+    // }
+
+    // [HttpPost]
+    // [Route("CalcularAreaCuadrado")]
+    // public async Task<IActionResult> CalcularAreaCuadrado(AreaCuadrado areaCuadrado)
+    // {
+    //     var resultado = await _matematicaService.AreaCuadrado(areaCuadrado);
+    //     return Ok("🟥 El área del cuadrado es: " + resultado);
+    // }
+
+    // [HttpPost]
+    // [Route("AreaCuadradoCuatroLados")]
+    // public async Task<IActionResult> AreaCuadradoCuatroLados(AreaCuadradoCuatroLados lado)
+    // {
+    //     var resultado = await _matematicaService.AreaCuadradoCuatroLados(lado);
+    //     return Ok("🟥 El área del cuadrado es: " + resultado);
+    // }
+
+    // [HttpPost]
+    // [Route("CalcularAreaTriangulo")]
+    // public async Task<IActionResult> CalcularAreaTriangulo(AreaTriangulo areaTriangulo)
+    // {
+    //     try
+    //     {
+    //         var resultado = await _matematicaService.AreaTriangulo(areaTriangulo);
+    //         return Ok("🔺El área del triángulo es: " + resultado);
+    //     }
+    //     catch (InvalidOperationException ex)
+    //     {
+    //         return BadRequest(ex.Message);
+    //     }
+
+    // }
 
 }
