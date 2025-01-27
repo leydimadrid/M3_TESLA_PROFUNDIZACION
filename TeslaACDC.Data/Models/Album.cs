@@ -7,18 +7,13 @@ public class Album : BaseEntity<int>
     public string Name { get; set; } = String.Empty;
     public int Year { get; set; }
     public Artist Artist { get; set; }
-    public Gender Gender { get; set; } = Gender.Pop;
+    public Gender Gender { get; set; }
+    public string GenderName => Gender.ToString();
 }
 
 public enum Gender
 {
-    Rock,
-    Pop,
-    Urbano,
     Reggaeton,
-    Metal,
-    HardRock,
-    RockProgresivo,
     Vallenato,
     Champeta,
     Unknown

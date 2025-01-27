@@ -11,6 +11,7 @@ public class AlbumService : IAlbumService
     public AlbumService()
     {
 
+
         _listaAlbum.Add(new()
         {
             Name = "Un Verano Sin Ti",
@@ -147,6 +148,15 @@ public class AlbumService : IAlbumService
         BuildMessage(lista, "", HttpStatusCode.NotFound, 0);
     }
 
+    public async Task<BaseMessage<Album>> FindByGender(int gender)
+    {
+
+        var lista = _listaAlbum.Where(album => album.Gender == (Gender)gender).ToList();
+        return lista.Any() ? BuildMessage(lista, "", HttpStatusCode.OK, lista.Count) :
+            BuildMessage(lista, "Género no encontrado", HttpStatusCode.NotFound, 0);
+    }
+
+
     private BaseMessage<Album> BuildMessage(List<Album> responseElements, string message = "", HttpStatusCode
     statusCode = HttpStatusCode.OK, int totalElements = 0)
     {
@@ -158,4 +168,6 @@ public class AlbumService : IAlbumService
             ResponseElements = responseElements
         };
     }
+
+
 }

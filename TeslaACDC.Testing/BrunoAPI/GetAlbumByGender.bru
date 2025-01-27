@@ -1,0 +1,15 @@
+meta {
+  name: GetAlbumByGender
+  type: http
+  seq: 13
+}
+
+get {
+  url: http://localhost:5046/api/tesla/getalbumbygender?gender=3
+  body: none
+  auth: none
+}
+
+params:query {
+  gender: 3
+}

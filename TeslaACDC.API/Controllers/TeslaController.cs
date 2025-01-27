@@ -18,7 +18,6 @@ public class TeslaController : ControllerBase
         _albumService = albumService;
     }
 
-
     [HttpGet]
     [Route("GetAlbum")]
     public async Task<IActionResult> GetAlbums()
@@ -66,6 +65,17 @@ public class TeslaController : ControllerBase
         var lista = await _albumService.FindByNameArtist(artist);
         return StatusCode((int)lista.StatusCode, lista);
     }
+
+    [HttpGet]
+    [Route("GetAlbumByGender")]
+    public async Task<IActionResult> FindByGender(int gender)
+    {
+
+        var lista = await _albumService.FindByGender(gender);
+        return StatusCode((int)lista.StatusCode, lista);
+    }
+
+
 
     // [HttpPost]
     // [Route("PostAlbum")]
