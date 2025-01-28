@@ -8,7 +8,6 @@ public class Album : BaseEntity<int>
     public int Year { get; set; }
     public Artist Artist { get; set; }
     public Gender Gender { get; set; }
-    public string GenderName => Gender.ToString();
 }
 
 public enum Gender

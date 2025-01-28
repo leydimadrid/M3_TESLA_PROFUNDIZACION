@@ -11,7 +11,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 //Inyección de dependencias
 builder.Services.AddScoped<IAlbumService, AlbumService>();
-builder.Services.AddScoped<IMatematicaService, MatematicaService>();
 
 var app = builder.Build();
 

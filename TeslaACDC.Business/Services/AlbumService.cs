@@ -10,8 +10,6 @@ public class AlbumService : IAlbumService
 
     public AlbumService()
     {
-
-
         _listaAlbum.Add(new()
         {
             Name = "Un Verano Sin Ti",
@@ -98,19 +96,7 @@ public class AlbumService : IAlbumService
 
     public async Task<BaseMessage<Album>> GetAlbums()
     {
-        return new BaseMessage<Album>()
-        {
-            Message = "",
-            StatusCode = HttpStatusCode.OK,
-            TotalElements = _listaAlbum.Count,
-            ResponseElements = _listaAlbum
-        };
-    }
-
-    public Task<List<Album>> AddAlbums(Album album)
-    {
-        //Sin implementar aún
-        throw new NotImplementedException();
+        return BuildMessage(_listaAlbum, "", HttpStatusCode.OK, _listaAlbum.Count);
     }
 
     public async Task<BaseMessage<Album>> FindById(int id)
@@ -155,7 +141,6 @@ public class AlbumService : IAlbumService
         return lista.Any() ? BuildMessage(lista, "", HttpStatusCode.OK, lista.Count) :
             BuildMessage(lista, "Género no encontrado", HttpStatusCode.NotFound, 0);
     }
-
 
     private BaseMessage<Album> BuildMessage(List<Album> responseElements, string message = "", HttpStatusCode
     statusCode = HttpStatusCode.OK, int totalElements = 0)
