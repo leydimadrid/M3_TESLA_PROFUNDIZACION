@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using TeslaACDC.Business.Interfaces;
 using TeslaACDC.Business.Services;
+using TeslaACDC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<TeslaContext>(
+    options => options.UseNpgsql(builder.Configuration.GetConnectionString("TeslaDatabase"))
+);
 
 //Inyección de dependencias
 builder.Services.AddScoped<IAlbumService, AlbumService>();
