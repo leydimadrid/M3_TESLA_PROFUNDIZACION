@@ -1,0 +1,19 @@
+meta {
+  name: Post Artist
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:5046/api/artist/createartist
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Soy nuevo",
+    "label": "Sony Music",
+    "isOnTour": true
+  }
+}

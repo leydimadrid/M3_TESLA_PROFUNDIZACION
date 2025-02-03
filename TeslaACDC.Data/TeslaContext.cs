@@ -11,6 +11,7 @@ public class TeslaContext : DbContext
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
     public DbSet<Album> Albums { get; set; }
+    public DbSet<Artist> Artist { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

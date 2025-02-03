@@ -18,14 +18,38 @@ public class ArtistRepository<TId, TEntity> : IArtistRepository<TId, TEntity>
         _context = context;
         _dbSet = _context.Set<TEntity>();
     }
-    public async Task AddAsync(TEntity artista)
+    public async Task<List<Artist>> ToListAsync()
     {
-        await _dbSet.AddAsync(artista);
-        await _context.SaveChangesAsync();
+        return await _context.Artist.ToListAsync();
     }
 
-    public async Task<TEntity> FindAsync(TId id)
+    public async Task<TEntity> AddAsync(TEntity artist)
     {
-        return await _dbSet.FindAsync(id);
+
+        await _dbSet.AddAsync(artist);
+        await _context.SaveChangesAsync();
+        return artist;
+    }
+
+    public async Task<Artist> FindAsync(TId id)
+    {
+        return await _context.Artist.FindAsync(id);
+
+    }
+
+    public async Task<Artist> UpdateAsync(Artist artist)
+    {
+        await _context.SaveChangesAsync();
+        return artist;
+    }
+
+    public async Task<bool> DeleteAsync(TId id)
+    {
+        var artist = await _context.Artist.FindAsync(id);
+        if (artist == null)
+            throw new KeyNotFoundException("El artista no fue encontrado.");
+        _context.Artist.Remove(artist);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

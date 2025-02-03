@@ -1,7 +1,6 @@
 
 
 using TeslaACDC.Data.DTO;
-using TeslaACDC.Data.Models;
 
 namespace TeslaACDC.Business.Interfaces;
 

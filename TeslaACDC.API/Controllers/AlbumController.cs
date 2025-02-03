@@ -2,7 +2,6 @@ namespace TeslaACDC.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.Models;
 using TeslaACDC.Data.DTO;
 
 
@@ -49,11 +48,11 @@ public class AlbumController : ControllerBase
         try
         {
             var updatedAlbum = await _albumService.UpdateAsync(id, album);
-            return Ok(updatedAlbum);  // Devolver el DTO actualizado
+            return Ok(updatedAlbum);
         }
         catch (KeyNotFoundException ex)
         {
-            return NotFound(ex.Message);  // Si el álbum no se encuentra
+            return NotFound(ex.Message);
         }
 
     }

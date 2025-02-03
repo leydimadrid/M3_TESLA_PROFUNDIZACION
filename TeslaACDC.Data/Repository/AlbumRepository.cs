@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 
 using TeslaACDC.Data.IRepository;
 using TeslaACDC.Data.Models;
-using TeslaACDC.Data.DTO;
 namespace TeslaACDC.Data.Repository;
 
 public class AlbumRepository<TId, TEntity> : IAlbumRepository<TId, TEntity>

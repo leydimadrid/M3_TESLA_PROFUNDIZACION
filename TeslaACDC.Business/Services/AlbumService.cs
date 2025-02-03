@@ -12,7 +12,6 @@ public class AlbumService : IAlbumService
 {
     private readonly TeslaContext _context;
     private IAlbumRepository<int, Album> _albumRepository;
-    private IArtistRepository<int, Artist> _artistRepository;
 
     public AlbumService(TeslaContext context)
     {

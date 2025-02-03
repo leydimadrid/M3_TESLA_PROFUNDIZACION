@@ -1,0 +1,19 @@
+meta {
+  name: Put Artist
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:5046/api/artist/11
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Soy nuevito",
+    "label": "Sony Music",
+    "isOnTour": true
+  }
+}
