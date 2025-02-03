@@ -1,0 +1,19 @@
+meta {
+  name: Delete Album
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:5046/api/album/13
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Deja Vu",
+    "year": 2013,
+    "artistId": 2
+  }
+}

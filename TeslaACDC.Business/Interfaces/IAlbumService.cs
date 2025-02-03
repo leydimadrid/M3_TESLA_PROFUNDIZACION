@@ -1,16 +1,17 @@
 
+
+using TeslaACDC.Data.DTO;
 using TeslaACDC.Data.Models;
 
 namespace TeslaACDC.Business.Interfaces;
 
 public interface IAlbumService
 {
-    Task<BaseMessage<Album>> GetAlbums();
-    Task<BaseMessage<Album>> FindById(int id);
-    Task<BaseMessage<Album>> FindByName(string name);
-    Task<BaseMessage<Album>> FindByYear(int year);
-    Task<BaseMessage<Album>> FindByRangeYear(int year1, int year2);
-    Task<BaseMessage<Album>> FindByNameArtist(string artist);
-    Task<BaseMessage<Album>> FindByGender(int gender);
+
+    public Task<List<AlbumDTO>> ToListAsync();
+    public Task<AlbumDTO> FindAsync(int id);
+    public Task<AlbumDTO> AddAsync(AlbumDTO album);
+    public Task<AlbumDTO> UpdateAsync(int id, AlbumDTO albumDto);
+    public Task<bool> DeleteAsync(int id);
 
 }

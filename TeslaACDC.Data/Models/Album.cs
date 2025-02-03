@@ -6,6 +6,7 @@ public class Album : BaseEntity<int>
 {
     public string Name { get; set; } = String.Empty;
     public int Year { get; set; }
+    public int ArtistId { get; set; }
     public Artist Artist { get; set; }
     public Gender Gender { get; set; }
 }

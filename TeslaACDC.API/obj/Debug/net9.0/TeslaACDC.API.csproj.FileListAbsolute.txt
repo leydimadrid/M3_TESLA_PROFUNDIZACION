@@ -39,15 +39,6 @@ C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\TeslaACDC.Data.pdb
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Npgsql.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Humanizer.dll
@@ -100,7 +91,6 @@ C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\System.Composition.Typ
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\System.Reflection.MetadataLoadContext.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
-C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\System.Text.Json.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\af\Humanizer.resources.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\ar\Humanizer.resources.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\az\Humanizer.resources.dll

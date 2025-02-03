@@ -1,0 +1,21 @@
+meta {
+  name: Post Album
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:5046/api/album/createalbum
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Soy nuevito",
+    "year": 1980,
+    "artistId": 1,
+    "gender": 3
+  }
+  
+}

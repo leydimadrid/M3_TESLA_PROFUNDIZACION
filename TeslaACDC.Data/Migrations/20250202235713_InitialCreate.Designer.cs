@@ -11,7 +11,7 @@ using TeslaACDC.Data;
 namespace TeslaACDC.Data.Migrations
 {
     [DbContext(typeof(TeslaContext))]
-    [Migration("20250129151608_InitialCreate")]
+    [Migration("20250202235713_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -49,7 +49,7 @@ namespace TeslaACDC.Data.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("Album", (string)null);
+                    b.ToTable("album", (string)null);
                 });
 
             modelBuilder.Entity("TeslaACDC.Data.Models.Artist", b =>
@@ -73,7 +73,7 @@ namespace TeslaACDC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artist", (string)null);
+                    b.ToTable("artist", (string)null);
                 });
 
             modelBuilder.Entity("TeslaACDC.Data.Models.Album", b =>

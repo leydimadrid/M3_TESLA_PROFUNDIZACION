@@ -19,8 +19,7 @@ public class TeslaContext : DbContext
             return;
         }
 
-        builder.Entity<Album>().ToTable("Album").HasKey(k => k.Id);
-        builder.Entity<Artist>().ToTable("Artist").HasKey(k => k.Id);
-        base.OnModelCreating(builder);
+        builder.Entity<Album>().ToTable("album").HasKey(k => k.Id);
+        builder.Entity<Artist>().ToTable("artist").HasKey(k => k.Id);
     }
 }

@@ -12,7 +12,7 @@ namespace TeslaACDC.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Artist",
+                name: "artist",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -23,11 +23,11 @@ namespace TeslaACDC.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Artist", x => x.Id);
+                    table.PrimaryKey("PK_artist", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Album",
+                name: "album",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -39,18 +39,18 @@ namespace TeslaACDC.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Album", x => x.Id);
+                    table.PrimaryKey("PK_album", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Album_Artist_ArtistId",
+                        name: "FK_album_artist_ArtistId",
                         column: x => x.ArtistId,
-                        principalTable: "Artist",
+                        principalTable: "artist",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Album_ArtistId",
-                table: "Album",
+                name: "IX_album_ArtistId",
+                table: "album",
                 column: "ArtistId");
         }
 
@@ -58,10 +58,10 @@ namespace TeslaACDC.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Album");
+                name: "album");
 
             migrationBuilder.DropTable(
-                name: "Artist");
+                name: "artist");
         }
     }
 }
