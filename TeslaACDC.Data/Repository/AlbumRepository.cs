@@ -25,7 +25,6 @@ public class AlbumRepository<TId, TEntity> : IAlbumRepository<TId, TEntity>
 
     public async Task<TEntity> AddAsync(TEntity album)
     {
-
         await _dbSet.AddAsync(album);
         await _context.SaveChangesAsync();
         return album;
@@ -34,7 +33,6 @@ public class AlbumRepository<TId, TEntity> : IAlbumRepository<TId, TEntity>
     public async Task<Album> FindAsync(TId id)
     {
         return await _context.Albums.FindAsync(id);
-
     }
 
     public async Task<Album> UpdateAsync(Album album)
@@ -43,13 +41,9 @@ public class AlbumRepository<TId, TEntity> : IAlbumRepository<TId, TEntity>
         return album;
     }
 
-    public async Task<bool> DeleteAsync(TId id)
+    public async Task DeleteAsync(TEntity album)
     {
-        var album = await _context.Albums.FindAsync(id);
-        if (album == null)
-            throw new KeyNotFoundException("El álbum no fue encontrado.");
-        _context.Albums.Remove(album);
+        _dbSet.Remove(album);
         await _context.SaveChangesAsync();
-        return true;
     }
 }

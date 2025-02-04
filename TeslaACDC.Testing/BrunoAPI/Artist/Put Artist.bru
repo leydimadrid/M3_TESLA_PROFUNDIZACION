@@ -5,15 +5,16 @@ meta {
 }
 
 put {
-  url: http://localhost:5046/api/artist/11
+  url: http://localhost:5046/api/artist/update/2
   body: json
   auth: none
 }
 
 body:json {
-  {
-    "name": "Soy nuevito",
-    "label": "Sony Music",
-    "isOnTour": true
-  }
+    {
+      "name": "Kevin Flórez actualizado",
+      "label": "Independiente",
+      "isOnTour": true,
+      "id": 2
+    }
 }

@@ -2,7 +2,7 @@ namespace TeslaACDC.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.DTO;
+using TeslaACDC.Data.Models;
 
 
 [ApiController]
@@ -19,50 +19,42 @@ public class AlbumController : ControllerBase
 
     [HttpGet]
     [Route("GetAllAlbum")]
-    public async Task<IActionResult> ToListAsync()
+    public async Task<IActionResult> GetAllAlbums()
     {
-        var albums = await _albumService.ToListAsync();
+        var albums = await _albumService.GetAllAlbums();
         return Ok(albums);
     }
 
     [HttpGet]
     [Route("GetById")]
-    public async Task<IActionResult> FindAsync(int id)
+    public async Task<IActionResult> FindAlbumById(int id)
     {
-        var album = await _albumService.FindAsync(id);
+        var album = await _albumService.FindAlbumById(id);
         return Ok(album);
     }
 
     [HttpPost]
     [Route("CreateAlbum")]
-    public async Task<IActionResult> AddAsync(AlbumDTO album)
+    public async Task<IActionResult> AddAlbum(Album album)
     {
-        var newAlbum = await _albumService.AddAsync(album);
+        var newAlbum = await _albumService.AddAlbum(album);
         return Ok(newAlbum);
     }
 
     [HttpPut]
-    [Route("{id}")]
-    public async Task<IActionResult> UpdateAlbum(int id, AlbumDTO album)
+    [Route("Update/{id}")]
+    public async Task<IActionResult> UpdateAlbum(int id, Album album)
     {
-        try
-        {
-            var updatedAlbum = await _albumService.UpdateAsync(id, album);
-            return Ok(updatedAlbum);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-
+        var updatedAlbum = await _albumService.UpdateAlbum(id, album);
+        return Ok(updatedAlbum);
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route("Delete/{id}")]
     public async Task<IActionResult> DeleteAlbum(int id)
     {
-        var result = await _albumService.DeleteAsync(id);
-        return Ok(result);
+        await _albumService.DeleteAlbum(id);
+        return NoContent();
     }
 
 

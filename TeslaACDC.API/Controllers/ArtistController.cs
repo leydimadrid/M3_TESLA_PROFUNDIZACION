@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.DTO;
+using TeslaACDC.Data.Models;
 namespace TeslaACDC.Controllers;
 
 [Controller]
@@ -17,49 +17,41 @@ public class ArtistController : ControllerBase
 
     [HttpGet]
     [Route("GetAllArtist")]
-    public async Task<IActionResult> ToListAsync()
+    public async Task<IActionResult> GetAllArtist()
     {
-        var artist = await _artistService.ToListAsync();
+        var artist = await _artistService.GetAllArtist();
         return Ok(artist);
     }
 
     [HttpGet]
     [Route("GetById")]
-    public async Task<IActionResult> FindAsync(int id)
+    public async Task<IActionResult> FindArtistById(int id)
     {
-        var artist = await _artistService.FindAsync(id);
+        var artist = await _artistService.FindArtistById(id);
         return Ok(artist);
     }
 
     [HttpPost]
     [Route("CreateArtist")]
-    public async Task<IActionResult> AddAsync([FromBody] ArtistDTO artist)
+    public async Task<IActionResult> AddArtist([FromBody] Artist artist)
     {
-        var newArtist = await _artistService.AddAsync(artist);
+        var newArtist = await _artistService.AddArtist(artist);
         return Ok(newArtist);
     }
 
     [HttpPut]
-    [Route("{id}")]
-    public async Task<IActionResult> UpdateArtist(int id, [FromBody] ArtistDTO artist)
+    [Route("Update/{id}")]
+    public async Task<IActionResult> UpdateArtist(int id, [FromBody] Artist artist)
     {
-        try
-        {
-            var updatedArtist = await _artistService.UpdateAsync(id, artist);
-            return Ok(updatedArtist);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-
+        var updatedArtist = await _artistService.UpdateArtist(id, artist);
+        return Ok(updatedArtist);
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route("Delete/{id}")]
     public async Task<IActionResult> DeleteArtist(int id)
     {
-        var result = await _artistService.DeleteAsync(id);
-        return Ok(result);
+        await _artistService.DeleteArtist(id);
+        return NoContent();
     }
 }

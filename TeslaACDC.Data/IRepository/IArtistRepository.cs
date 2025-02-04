@@ -11,5 +11,5 @@ where TEntity : BaseEntity<TId>
     Task<TEntity> AddAsync(TEntity artist);
     Task<Artist> FindAsync(TId id);
     Task<Artist> UpdateAsync(Artist artist);
-    Task<bool> DeleteAsync(TId id);
+    Task DeleteAsync(TEntity entity);
 }

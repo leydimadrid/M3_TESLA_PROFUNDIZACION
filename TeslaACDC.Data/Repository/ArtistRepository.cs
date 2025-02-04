@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 using TeslaACDC.Data.IRepository;
 using TeslaACDC.Data.Models;
@@ -25,7 +24,6 @@ public class ArtistRepository<TId, TEntity> : IArtistRepository<TId, TEntity>
 
     public async Task<TEntity> AddAsync(TEntity artist)
     {
-
         await _dbSet.AddAsync(artist);
         await _context.SaveChangesAsync();
         return artist;
@@ -43,13 +41,9 @@ public class ArtistRepository<TId, TEntity> : IArtistRepository<TId, TEntity>
         return artist;
     }
 
-    public async Task<bool> DeleteAsync(TId id)
+    public async Task DeleteAsync(TEntity artist)
     {
-        var artist = await _context.Artist.FindAsync(id);
-        if (artist == null)
-            throw new KeyNotFoundException("El artista no fue encontrado.");
-        _context.Artist.Remove(artist);
+        _dbSet.Remove(artist);
         await _context.SaveChangesAsync();
-        return true;
     }
 }

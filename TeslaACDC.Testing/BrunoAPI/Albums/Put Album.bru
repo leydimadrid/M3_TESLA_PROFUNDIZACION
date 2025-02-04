@@ -5,16 +5,18 @@ meta {
 }
 
 put {
-  url: http://localhost:5046/api/album/3
+  url: http://localhost:5046/api/album/update/16
   body: json
   auth: none
 }
 
 body:json {
   {
-    "name": "Back in Black Actualizado",
-    "year": 1980,
-    "artistId": 1,
-    "gender": 3
+    "name": "Los Reyes del Movimiento",
+    "year": 2014,
+    "genre": 0,
+    "artistId": 6,
+    "artist": null,
+    "id": 16
   }
 }

@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using TeslaACDC.Business.Interfaces;
 using TeslaACDC.Data;
-using TeslaACDC.Data.DTO;
 using TeslaACDC.Data.IRepository;
 using TeslaACDC.Data.Models;
 using TeslaACDC.Data.Repository;
@@ -19,20 +18,12 @@ public class ArtistService : IArtistService
         _context = context;
         _artistRepository = new ArtistRepository<int, Artist>(_context);
     }
-    public async Task<List<ArtistDTO>> ToListAsync()
+    public async Task<List<Artist>> GetAllArtist()
     {
-        var albums = await _artistRepository.ToListAsync();
-        // Mapeo manual de Album a AlbumDTO
-        var artist = albums.Select(a => new ArtistDTO
-        {
-            Name = a.Name,
-            Label = a.Label,
-            IsOnTour = a.IsOnTour,
-        }).ToList();
-        return artist;
+        return await _artistRepository.ToListAsync();
     }
 
-    public async Task<ArtistDTO> AddAsync(ArtistDTO artist)
+    public async Task<Artist> AddArtist(Artist artist)
     {
         var artistEntity = new Artist
         {
@@ -41,64 +32,51 @@ public class ArtistService : IArtistService
             IsOnTour = artist.IsOnTour,
         };
 
-        // Llama al repositorio para agregar el álbum
         var addedArtist = await _artistRepository.AddAsync(artistEntity);
-
-        // Mapea la entidad Album a AlbumDTO para devolverlo
-        return new ArtistDTO
-        {
-            Name = addedArtist.Name,
-            Label = addedArtist.Label,
-            IsOnTour = addedArtist.IsOnTour,
-        };
+        return addedArtist;
     }
 
-    public async Task<ArtistDTO> FindAsync(int id)
+    public async Task<Artist> FindArtistById(int id)
     {
         var artist = await _artistRepository.FindAsync(id);
         if (artist == null)
-            throw new KeyNotFoundException($"No se encontró el artista con ID {id}");
-
-        return new ArtistDTO
         {
-            Name = artist.Name,
-            Label = artist.Label,
-            IsOnTour = artist.IsOnTour,
-        };
+            throw new KeyNotFoundException($"No se encontró el artista con ID {id}");
+        }
+        return artist;
     }
 
-    public async Task<ArtistDTO> UpdateAsync(int id, ArtistDTO artist)
+    public async Task<Artist> UpdateArtist(int id, Artist artist)
     {
-        // Buscar el álbum en el repositorio
         var artistEntity = await _artistRepository.FindAsync(id);
         if (artistEntity == null)
+        {
             throw new KeyNotFoundException("El artista no fue encontrado.");
+        }
 
-        // Actualizar las propiedades del álbum
         artistEntity.Name = artist.Name;
         artistEntity.Label = artist.Label;
         artistEntity.IsOnTour = artist.IsOnTour;
 
-        // Llamar al repositorio para actualizar el álbum
+
         var updatedArtist = await _artistRepository.UpdateAsync(artistEntity);
-
-        return new ArtistDTO
-        {
-            Name = updatedArtist.Name,
-            Label = updatedArtist.Label,
-            IsOnTour = updatedArtist.IsOnTour,
-        };
+        return updatedArtist;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task DeleteArtist(int id)
     {
-        return await _artistRepository.DeleteAsync(id);
+        var artist = await _artistRepository.FindAsync(id);
+        if (artist == null)
+        {
+            throw new KeyNotFoundException("El artist no fue encontrado.");
+        }
+        await _artistRepository.DeleteAsync(artist);
     }
 
-    private BaseMessage<Album> BuildMessage(List<Album> responseElements, string message = "", HttpStatusCode
+    private BaseMessage<Artist> BuildMessage(List<Artist> responseElements, string message = "", HttpStatusCode
     statusCode = HttpStatusCode.OK, int totalElements = 0)
     {
-        return new BaseMessage<Album>()
+        return new BaseMessage<Artist>()
         {
             Message = message,
             StatusCode = statusCode,

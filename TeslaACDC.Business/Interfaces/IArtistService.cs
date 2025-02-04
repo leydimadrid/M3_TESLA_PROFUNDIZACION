@@ -1,14 +1,14 @@
 using System;
 
 namespace TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.DTO;
+using TeslaACDC.Data.Models;
 
 
 public interface IArtistService
 {
-    public Task<List<ArtistDTO>> ToListAsync();
-    public Task<ArtistDTO> FindAsync(int id);
-    public Task<ArtistDTO> AddAsync(ArtistDTO artist);
-    public Task<ArtistDTO> UpdateAsync(int id, ArtistDTO artist);
-    public Task<bool> DeleteAsync(int id);
+    public Task<List<Artist>> GetAllArtist();
+    public Task<Artist> FindArtistById(int id);
+    public Task<Artist> AddArtist(Artist artist);
+    public Task<Artist> UpdateArtist(int id, Artist artist);
+    public Task DeleteArtist(int id);
 }
