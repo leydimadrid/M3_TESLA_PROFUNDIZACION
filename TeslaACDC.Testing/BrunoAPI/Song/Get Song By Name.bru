@@ -1,0 +1,15 @@
+meta {
+  name: Get Song By Name
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:5046/api/song/getbyname?name=2
+  body: none
+  auth: none
+}
+
+params:query {
+  name: 2
+}

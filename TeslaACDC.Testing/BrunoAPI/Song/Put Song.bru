@@ -1,0 +1,19 @@
+meta {
+  name: Put Song
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:5046/api/song/update/6
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Nueva cancion",
+    "durationseg": 240,
+    "albumId": 3
+  }
+}

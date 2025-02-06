@@ -19,62 +19,80 @@ public class AlbumService : IAlbumService
     }
 
 
-    public async Task<List<Album>> GetAllAlbums()
+    public async Task<BaseMessage<Album>> GetAllAlbums()
     {
-        return await _albumRepository.ToListAsync();
+        var lista = await _albumRepository.GetAllAlbums();
+        return lista.Any()
+            ? BuildMessage(lista, "", HttpStatusCode.OK, lista.Count)
+            : BuildMessage(lista, "", HttpStatusCode.NotFound, 0);
     }
 
-    public async Task<Album> AddAlbum(Album album)
+    public async Task<BaseMessage<Album>> AddAlbum(Album album)
     {
-        var albumEntity = new Album
+        var error = Validate.ValidateNameAlbum(album);
+        if (error.Any())
         {
-            Name = album.Name,
-            Year = album.Year,
-            ArtistId = album.ArtistId,
-            Artist = album.Artist,
-            Genre = album.Genre
-        };
-        var addedAlbum = await _albumRepository.AddAsync(albumEntity);
-        return addedAlbum;
-    }
-
-    public async Task<Album> FindAlbumById(int id)
-    {
-        var album = await _albumRepository.FindAsync(id);
-        if (album == null)
-        {
-            throw new KeyNotFoundException($"No se encontró el álbum con ID {id}");
+            return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
         }
 
-        return album;
+        var addAlbum = await _albumRepository.AddAlbum(album);
+        return addAlbum != null
+            ? BuildMessage(new List<Album> { album }, "Álbum agregado exitosamente.", HttpStatusCode.OK, 1)
+            : BuildMessage(new List<Album>(), "", HttpStatusCode.InternalServerError, 0);
     }
 
-    public async Task<Album> UpdateAlbum(int id, Album album)
+    public async Task<BaseMessage<Album>> FindAlbumById(int id)
     {
-        var albumEntity = await _albumRepository.FindAsync(id);
-        if (albumEntity == null)
+        var album = await _albumRepository.FindAlbumById(id);
+        return album == null
+            ? BuildMessage(new List<Album> { album }, "", HttpStatusCode.NotFound, 0)
+            : BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1);
+    }
+
+    public async Task<BaseMessage<Album>> FindAlbumByName(string name)
+    {
+        var album = await _albumRepository.FindAlbumByName(name);
+        return album.Any()
+            ? BuildMessage(album, "", HttpStatusCode.OK, album.Count())
+            : BuildMessage(album, "", HttpStatusCode.NotFound, 0);
+    }
+
+    public async Task<BaseMessage<Album>> FindAlbumByRange(int year1, int year2)
+    {
+
+        var error = Validate.ValidateByRange(year1, year2);
+        if (error.Any())
         {
-            throw new KeyNotFoundException("El álbum no fue encontrado.");
+            return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
         }
 
+        var album = await _albumRepository.FindAlbumByRange(year1, year2);
+        return BuildMessage(album, "", HttpStatusCode.OK, album.Count());
+    }
+
+    public async Task<BaseMessage<Album>> UpdateAlbum(int id, Album album)
+    {
+
+        var albumEntity = await _albumRepository.FindAlbumById(id);
         albumEntity.Name = album.Name;
         albumEntity.Year = album.Year;
         albumEntity.ArtistId = album.ArtistId;
         albumEntity.Artist = album.Artist;
         albumEntity.Genre = album.Genre;
+        return albumEntity == null
+            ? BuildMessage(new List<Album>(), "Álbum no encontrado", HttpStatusCode.NotFound, 0)
+            : await _albumRepository.UpdateAlbum(albumEntity)
+                .ContinueWith(_ => BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1));
 
-        var updatedAlbum = await _albumRepository.UpdateAsync(albumEntity);
-        return updatedAlbum;
     }
 
-    public async Task DeleteAlbum(int id)
+    public async Task<BaseMessage<Album>> DeleteAlbum(int id)
     {
-        var album = await _albumRepository.FindAsync(id);
-        if (album == null)
-        {
-            throw new KeyNotFoundException("El álbum no fue encontrado.");
-        }
-        await _albumRepository.DeleteAsync(album);
+        var album = await _albumRepository.FindAlbumById(id);
+        return album == null
+            ? BuildMessage(new List<Album>(), "Álbum no encontrado", HttpStatusCode.InternalServerError, 0)
+            : await _albumRepository.DeleteAlbum(album)
+                .ContinueWith(_ => BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1));
     }
 
     private BaseMessage<Album> BuildMessage(List<Album> responseElements, string message = "", HttpStatusCode
@@ -88,5 +106,7 @@ public class AlbumService : IAlbumService
             ResponseElements = responseElements
         };
     }
+
+
 
 }

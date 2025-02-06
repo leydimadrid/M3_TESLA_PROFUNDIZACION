@@ -18,59 +18,68 @@ public class ArtistService : IArtistService
         _context = context;
         _artistRepository = new ArtistRepository<int, Artist>(_context);
     }
-    public async Task<List<Artist>> GetAllArtist()
+    public async Task<BaseMessage<Artist>> GetAllArtist()
     {
-        return await _artistRepository.ToListAsync();
+        var lista = await _artistRepository.GetAllArtist();
+        return lista.Any()
+            ? BuildMessage(lista, "", HttpStatusCode.OK, lista.Count)
+            : BuildMessage(lista, "", HttpStatusCode.NotFound, 0);
     }
 
-    public async Task<Artist> AddArtist(Artist artist)
-    {
-        var artistEntity = new Artist
-        {
-            Name = artist.Name,
-            Label = artist.Label,
-            IsOnTour = artist.IsOnTour,
-        };
 
-        var addedArtist = await _artistRepository.AddAsync(artistEntity);
-        return addedArtist;
-    }
-
-    public async Task<Artist> FindArtistById(int id)
+    public async Task<BaseMessage<Artist>> AddArtist(Artist artist)
     {
-        var artist = await _artistRepository.FindAsync(id);
-        if (artist == null)
+
+        var error = Validate.ValidateNameArtist(artist);
+        if (error.Any())
         {
-            throw new KeyNotFoundException($"No se encontró el artista con ID {id}");
+            return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
         }
-        return artist;
+
+        await _artistRepository.AddArtist(artist);
+        return BuildMessage(new List<Artist> { artist }, "Artista agregado exitosamente.", HttpStatusCode.OK, 1);
     }
 
-    public async Task<Artist> UpdateArtist(int id, Artist artist)
+    public async Task<BaseMessage<Artist>> FindArtistById(int id)
     {
-        var artistEntity = await _artistRepository.FindAsync(id);
-        if (artistEntity == null)
-        {
-            throw new KeyNotFoundException("El artista no fue encontrado.");
-        }
+        var artist = await _artistRepository.FindArtistById(id);
+        return artist == null
+            ? BuildMessage(new List<Artist> { artist }, "", HttpStatusCode.NotFound, 0)
+            : BuildMessage(new List<Artist> { artist }, "", HttpStatusCode.OK, 1);
+
+    }
+
+    public async Task<BaseMessage<Artist>> FindArtistByName(string name)
+    {
+        var artist = await _artistRepository.FindArtistByName(name);
+        return artist.Any()
+            ? BuildMessage(artist, "", HttpStatusCode.OK, artist.Count())
+            : BuildMessage(artist, "", HttpStatusCode.NotFound, 0);
+    }
+
+
+    public async Task<BaseMessage<Artist>> UpdateArtist(int id, Artist artist)
+    {
+        var artistEntity = await _artistRepository.FindArtistById(id);
 
         artistEntity.Name = artist.Name;
         artistEntity.Label = artist.Label;
         artistEntity.IsOnTour = artist.IsOnTour;
 
-
-        var updatedArtist = await _artistRepository.UpdateAsync(artistEntity);
-        return updatedArtist;
+        return artistEntity == null
+            ? BuildMessage(new List<Artist>(), "Artista no encontrado", HttpStatusCode.NotFound, 0)
+            : await _artistRepository.UpdateArtist(artistEntity)
+                .ContinueWith(_ => BuildMessage(new List<Artist> { artist }, "", HttpStatusCode.OK, 1));
     }
 
-    public async Task DeleteArtist(int id)
+    public async Task<BaseMessage<Artist>> DeleteArtist(int id)
     {
-        var artist = await _artistRepository.FindAsync(id);
-        if (artist == null)
-        {
-            throw new KeyNotFoundException("El artist no fue encontrado.");
-        }
-        await _artistRepository.DeleteAsync(artist);
+        var artist = await _artistRepository.FindArtistById(id);
+        return artist == null
+            ? BuildMessage(new List<Artist>(), "Artista no encontrado", HttpStatusCode.InternalServerError, 0)
+            : await _artistRepository.DeleteArtist(artist)
+                .ContinueWith(_ => BuildMessage(new List<Artist> { artist }, "", HttpStatusCode.OK, 1));
+
     }
 
     private BaseMessage<Artist> BuildMessage(List<Artist> responseElements, string message = "", HttpStatusCode
@@ -84,4 +93,6 @@ public class ArtistService : IArtistService
             ResponseElements = responseElements
         };
     }
+
+
 }

@@ -33,6 +33,23 @@ public class AlbumController : ControllerBase
         return Ok(album);
     }
 
+    [HttpGet]
+    [Route("GetByName")]
+    public async Task<IActionResult> FindAlbumByName(string name)
+    {
+        var album = await _albumService.FindAlbumByName(name);
+        return Ok(album);
+    }
+
+    [HttpGet]
+    [Route("GetByRange")]
+    public async Task<IActionResult> FindAlbumByRange(int year1, int year2)
+    {
+        var album = await _albumService.FindAlbumByRange(year1, year2);
+        return Ok(album);
+    }
+
+
     [HttpPost]
     [Route("CreateAlbum")]
     public async Task<IActionResult> AddAlbum(Album album)

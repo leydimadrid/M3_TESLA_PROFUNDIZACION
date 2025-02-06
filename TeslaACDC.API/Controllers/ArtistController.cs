@@ -31,6 +31,14 @@ public class ArtistController : ControllerBase
         return Ok(artist);
     }
 
+    [HttpGet]
+    [Route("GetByName")]
+    public async Task<IActionResult> FindArtistByName(string name)
+    {
+        var artist = await _artistService.FindArtistByName(name);
+        return Ok(artist);
+    }
+
     [HttpPost]
     [Route("CreateArtist")]
     public async Task<IActionResult> AddArtist([FromBody] Artist artist)

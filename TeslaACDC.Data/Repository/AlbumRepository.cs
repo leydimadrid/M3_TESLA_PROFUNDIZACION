@@ -18,32 +18,47 @@ public class AlbumRepository<TId, TEntity> : IAlbumRepository<TId, TEntity>
         _dbSet = _context.Set<TEntity>();
     }
 
-    public async Task<List<Album>> ToListAsync()
+    public async Task<List<Album>> GetAllAlbums()
     {
-        return await _context.Albums.ToListAsync();
+        return await _context.Albums
+            .Include(x => x.Songs)
+            .Include(x => x.Artist)
+            .ToListAsync();
     }
 
-    public async Task<TEntity> AddAsync(TEntity album)
+    public async Task<TEntity> AddAlbum(TEntity album)
     {
         await _dbSet.AddAsync(album);
         await _context.SaveChangesAsync();
         return album;
     }
 
-    public async Task<Album> FindAsync(TId id)
+    public async Task<Album> FindAlbumById(TId id)
     {
         return await _context.Albums.FindAsync(id);
     }
 
-    public async Task<Album> UpdateAsync(Album album)
+    public async Task<List<Album>> FindAlbumByName(string name)
+    {
+        return await _context.Albums.Where(x => x.Name.ToLower().Contains(name)).ToListAsync();
+    }
+
+    public async Task<List<Album>> FindAlbumByRange(int year1, int year2)
+    {
+        return await _context.Albums.Where(album => album.Year >= year1 && album.Year <= year2).ToListAsync();
+    }
+
+    public async Task<Album> UpdateAlbum(Album album)
     {
         await _context.SaveChangesAsync();
         return album;
     }
 
-    public async Task DeleteAsync(TEntity album)
+    public async Task DeleteAlbum(TEntity album)
     {
         _dbSet.Remove(album);
         await _context.SaveChangesAsync();
     }
+
+
 }

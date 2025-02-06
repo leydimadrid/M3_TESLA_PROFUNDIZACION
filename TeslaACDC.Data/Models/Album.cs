@@ -6,7 +6,9 @@ public class Album : BaseEntity<int>
 {
     public string Name { get; set; } = String.Empty;
     public int Year { get; set; }
+    public ICollection<Song> Songs { get; set; } = new List<Song>();
     public Genre Genre { get; set; }
+
     [ForeignKey("Artist")]
     public int ArtistId { get; set; }
     public virtual Artist? Artist { get; set; }

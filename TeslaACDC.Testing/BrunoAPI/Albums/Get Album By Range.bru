@@ -1,0 +1,16 @@
+meta {
+  name: Get Album By Range
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:5046/api/album/getbyrange?year1=1994&year2=2020
+  body: none
+  auth: none
+}
+
+params:query {
+  year1: 1994
+  year2: 2020
+}

@@ -12,6 +12,7 @@ public class TeslaContext : DbContext
     }
     public DbSet<Album> Albums { get; set; }
     public DbSet<Artist> Artist { get; set; }
+    public DbSet<Song> Songs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -22,5 +23,6 @@ public class TeslaContext : DbContext
 
         builder.Entity<Album>().ToTable("album").HasKey(k => k.Id);
         builder.Entity<Artist>().ToTable("artist").HasKey(k => k.Id);
+        builder.Entity<Song>().ToTable("songs").HasKey(k => k.Id);
     }
 }

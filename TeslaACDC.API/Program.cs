@@ -19,8 +19,11 @@ builder.Services.AddDbContext<TeslaContext>(
 
 //Inyección de dependencias
 builder.Services.AddScoped<IAlbumService, AlbumService>();
+builder.Services.AddScoped<IAlbumRepository<int, Album>, AlbumRepository<int, Album>>();
 builder.Services.AddScoped<IArtistService, ArtistService>();
 builder.Services.AddScoped<IArtistRepository<int, Artist>, ArtistRepository<int, Artist>>();
+builder.Services.AddScoped<ISongService, SongService>();
+builder.Services.AddScoped<ISongRepository<int, Song>, SongRepository<int, Song>>();
 
 var app = builder.Build();
 

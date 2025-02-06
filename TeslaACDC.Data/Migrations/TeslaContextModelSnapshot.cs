@@ -73,6 +73,31 @@ namespace TeslaACDC.Data.Migrations
                     b.ToTable("artist", (string)null);
                 });
 
+            modelBuilder.Entity("TeslaACDC.Data.Models.Song", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DurationSeg")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.ToTable("songs", (string)null);
+                });
+
             modelBuilder.Entity("TeslaACDC.Data.Models.Album", b =>
                 {
                     b.HasOne("TeslaACDC.Data.Models.Artist", "Artist")
@@ -82,6 +107,22 @@ namespace TeslaACDC.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Artist");
+                });
+
+            modelBuilder.Entity("TeslaACDC.Data.Models.Song", b =>
+                {
+                    b.HasOne("TeslaACDC.Data.Models.Album", "Album")
+                        .WithMany("Songs")
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Album");
+                });
+
+            modelBuilder.Entity("TeslaACDC.Data.Models.Album", b =>
+                {
+                    b.Navigation("Songs");
                 });
 #pragma warning restore 612, 618
         }

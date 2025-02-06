@@ -7,9 +7,10 @@ public interface IArtistRepository<TId, TEntity>
 where TId : struct
 where TEntity : BaseEntity<TId>
 {
-    Task<List<Artist>> ToListAsync();
-    Task<TEntity> AddAsync(TEntity artist);
-    Task<Artist> FindAsync(TId id);
-    Task<Artist> UpdateAsync(Artist artist);
-    Task DeleteAsync(TEntity entity);
+    Task<List<Artist>> GetAllArtist();
+    Task<Artist> AddArtist(Artist artist);
+    Task<Artist> FindArtistById(TId id);
+    Task<List<Artist>> FindArtistByName(string name);
+    Task<Artist> UpdateArtist(Artist artist);
+    Task DeleteArtist(TEntity entity);
 }
