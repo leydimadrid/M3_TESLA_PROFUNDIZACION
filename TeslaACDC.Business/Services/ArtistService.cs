@@ -31,9 +31,14 @@ public class ArtistService : IArtistService
     {
 
         var error = Validate.ValidateNameArtist(artist);
-        if (error.Any())
+
+        var existingArtists = await _artistRepository.GetAllArtist();
+
+        var nameUnique = Validate.ValidateUniqueArtistName(artist, existingArtists);
+
+        if (error.Any() || nameUnique.Any())
         {
-            return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
+            return BuildMessage(null, string.Join("\n", error.Concat(nameUnique)), HttpStatusCode.BadRequest, 0);
         }
 
         await _artistRepository.AddArtist(artist);

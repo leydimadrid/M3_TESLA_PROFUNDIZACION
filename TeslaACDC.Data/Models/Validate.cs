@@ -25,12 +25,22 @@ public static class Validate
             message.Add("El nombre es requerido");
         }
 
-        
+        return message;
+    }
 
-        
+    public static List<string> ValidateUniqueArtistName(Artist artist, List<Artist> existingArtists)
+    {
+        var message = new List<string>();
+
+        if (existingArtists.Any(a => a.Name.Equals(artist.Name, StringComparison.OrdinalIgnoreCase)))
+        {
+            message.Add("El artista ya existe");
+        }
 
         return message;
     }
+
+
 
     public static List<string> ValidateNameSong(Song song)
     {

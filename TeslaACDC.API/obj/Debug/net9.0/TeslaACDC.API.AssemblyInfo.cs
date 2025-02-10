@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeslaACDC.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa619eae9fe38bb954c21f2b5deec717b87095f4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04aa1b1420c00f12eeed8e876c3241dfb87e67ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeslaACDC.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeslaACDC.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

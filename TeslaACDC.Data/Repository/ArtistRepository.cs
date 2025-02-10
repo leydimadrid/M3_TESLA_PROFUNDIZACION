@@ -24,18 +24,10 @@ public class ArtistRepository<TId, TEntity> : IArtistRepository<TId, TEntity>
 
     public async Task<Artist> AddArtist(Artist artist)
     {
-        /*La validación si el artista existe, está pendiente por estructurar mejor con BaseMessage
-        Adicional revisar si, el condicional si está bien colocarlo en el repositorio*/
+        await _context.Artist
+                .Where(x => x.Name.Equals(artist.Name))
+                .FirstOrDefaultAsync();
 
-        var existingArtist = await _context.Artist
-        .Where(x => x.Name.Equals(artist.Name))
-        .FirstOrDefaultAsync();
-
-
-        if (existingArtist != null)
-        {
-            throw new InvalidOperationException("Ya existe un artista con ese nombre.");
-        }
 
         await _context.Artist.AddAsync(artist);
         await _context.SaveChangesAsync();
