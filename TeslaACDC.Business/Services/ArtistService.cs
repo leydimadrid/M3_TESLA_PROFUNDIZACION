@@ -10,13 +10,11 @@ using TeslaACDC.Data.Repository;
 
 public class ArtistService : IArtistService
 {
-    private readonly TeslaContext _context;
     private IArtistRepository<int, Artist> _artistRepository;
 
-    public ArtistService(TeslaContext context)
+    public ArtistService(IArtistRepository<int, Artist> artistRepository)
     {
-        _context = context;
-        _artistRepository = new ArtistRepository<int, Artist>(_context);
+        _artistRepository = artistRepository;
     }
     public async Task<BaseMessage<Artist>> GetAllArtist()
     {

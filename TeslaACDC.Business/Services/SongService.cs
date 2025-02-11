@@ -10,14 +10,11 @@ namespace TeslaACDC.Business.Services;
 
 public class SongService : ISongService
 {
-    private readonly TeslaContext _context;
     private ISongRepository<int, Song> _songRepository;
 
-    public SongService(TeslaContext context)
+    public SongService(ISongRepository<int, Song> songRepository)
     {
-        _context = context;
-        _songRepository = new SongRepository<int, Song>(_context);
-
+        _songRepository = songRepository;
     }
 
     public async Task<BaseMessage<Song>> GetAllSongs()

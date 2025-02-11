@@ -1,21 +1,17 @@
 using System.Net;
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data;
 using TeslaACDC.Data.IRepository;
 using TeslaACDC.Data.Models;
-using TeslaACDC.Data.Repository;
 
 namespace TeslaACDC.Business.Services;
 
 public class AlbumService : IAlbumService
 {
-    private readonly TeslaContext _context;
     private IAlbumRepository<int, Album> _albumRepository;
 
-    public AlbumService(TeslaContext context)
+    public AlbumService(IAlbumRepository<int, Album> albumRepository)
     {
-        _context = context;
-        _albumRepository = new AlbumRepository<int, Album>(_context);
+        _albumRepository = albumRepository;
     }
 
 
@@ -45,7 +41,7 @@ public class AlbumService : IAlbumService
     {
         var album = await _albumRepository.FindAlbumById(id);
         return album == null
-            ? BuildMessage(new List<Album> { album }, "", HttpStatusCode.NotFound, 0)
+            ? BuildMessage(new List<Album>(), "", HttpStatusCode.NotFound, 0)
             : BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1);
     }
 
