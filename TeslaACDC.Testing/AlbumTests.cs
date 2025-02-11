@@ -25,7 +25,6 @@ public class AlbumTests
         };
     }
 
-
     [TestMethod]
     public async Task FindById_FindsSomething()
     {
@@ -65,8 +64,6 @@ public class AlbumTests
         var service = new AlbumService(null);
 
         // Act
-        // var result = await service.FindAlbumById(1);
-
         // Assert
         Assert.ThrowsExceptionAsync<Exception>(() => service.FindAlbumById(1));
     }
