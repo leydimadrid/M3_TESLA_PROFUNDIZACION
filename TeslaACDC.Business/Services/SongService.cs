@@ -1,7 +1,5 @@
 using System;
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.IRepository;
-using TeslaACDC.Data.Repository;
 using TeslaACDC.Data.Models;
 using TeslaACDC.Data;
 using System.Net;
@@ -10,19 +8,20 @@ namespace TeslaACDC.Business.Services;
 
 public class SongService : ISongService
 {
-    private ISongRepository<int, Song> _songRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public SongService(ISongRepository<int, Song> songRepository)
+    public SongService(IUnitOfWork unitOfWork)
     {
-        _songRepository = songRepository;
+        _unitOfWork = unitOfWork;
     }
+
 
     public async Task<BaseMessage<Song>> GetAllSongs()
     {
-        var lista = await _songRepository.GetAllSongs();
+        var lista = await _unitOfWork.SongRepository.GetAllAsync();
         return lista.Any()
-            ? BuildMessage(lista, "", HttpStatusCode.OK, lista.Count)
-            : BuildMessage(lista, "", HttpStatusCode.NotFound, 0);
+            ? BuildMessage(lista.ToList(), "", HttpStatusCode.OK, lista.Count())
+            : BuildMessage(lista.ToList(), "", HttpStatusCode.NotFound, 0);
     }
 
     public async Task<BaseMessage<Song>> AddSong(Song song)
@@ -33,8 +32,9 @@ public class SongService : ISongService
             return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
         }
 
-        var addSong = await _songRepository.AddSong(song);
-        return addSong != null
+        _unitOfWork.SongRepository.AddAsync(song);
+        await _unitOfWork.SaveAsync();
+        return song != null
             ? BuildMessage(new List<Song> { song }, "Canción agregada exitosamente.", HttpStatusCode.OK, 1)
             : BuildMessage(new List<Song>(), "", HttpStatusCode.InternalServerError, 0);
     }
@@ -42,7 +42,7 @@ public class SongService : ISongService
 
     public async Task<BaseMessage<Song>> FindSongById(int id)
     {
-        var song = await _songRepository.FindSongById(id);
+        var song = await _unitOfWork.SongRepository.FindAsync(id);
         return song == null
             ? BuildMessage(new List<Song> { song }, "", HttpStatusCode.NotFound, 0)
             : BuildMessage(new List<Song> { song }, "", HttpStatusCode.OK, 1);
@@ -50,33 +50,39 @@ public class SongService : ISongService
 
     public async Task<BaseMessage<Song>> FindSongByName(string name)
     {
-        var song = await _songRepository.FindSongByName(name);
+        var song = await _unitOfWork.SongRepository.GetAllAsync(x => x.Name.ToLower().Contains(name.ToLower()));
         return song.Any()
-            ? BuildMessage(song, "", HttpStatusCode.OK, song.Count())
-            : BuildMessage(song, "", HttpStatusCode.NotFound, 0);
+            ? BuildMessage(song.ToList(), "", HttpStatusCode.OK, song.Count())
+            : BuildMessage(song.ToList(), "", HttpStatusCode.NotFound, 0);
     }
 
 
     public async Task<BaseMessage<Song>> UpdateSong(int id, Song song)
     {
-        var songEntity = await _songRepository.FindSongById(id);
+        var songEntity = await _unitOfWork.SongRepository.FindAsync(id);
+        if (songEntity == null)
+        {
+            return BuildMessage(new List<Song>(), "Canción no encontrada", HttpStatusCode.NotFound, 0);
+        }
 
         songEntity.Name = song.Name;
         songEntity.DurationSeg = song.DurationSeg;
 
-        return songEntity == null
-            ? BuildMessage(new List<Song>(), "Artista no encontrado", HttpStatusCode.NotFound, 0)
-            : await _songRepository.UpdateSong(songEntity)
-                .ContinueWith(_ => BuildMessage(new List<Song> { song }, "", HttpStatusCode.OK, 1));
+        _unitOfWork.SongRepository.Update(songEntity);
+        await _unitOfWork.SaveAsync();
+        return BuildMessage(new List<Song> { song }, "", HttpStatusCode.OK, 1);
     }
 
     public async Task<BaseMessage<Song>> DeleteSong(int id)
     {
-        var song = await _songRepository.FindSongById(id);
-        return song == null
-            ? BuildMessage(new List<Song>(), "Esta canción no existe", HttpStatusCode.InternalServerError, 0)
-            : await _songRepository.DeleteSong(song)
-                .ContinueWith(_ => BuildMessage(new List<Song> { song }, "", HttpStatusCode.OK, 1));
+        var song = await _unitOfWork.SongRepository.FindAsync(id);
+        if (song == null)
+        {
+            return BuildMessage(new List<Song>(), "Canción no encontrada", HttpStatusCode.NotFound, 0);
+        }
+        _unitOfWork.SongRepository.Delete(song);
+        await _unitOfWork.SaveAsync();
+        return BuildMessage(new List<Song> { song }, "", HttpStatusCode.OK, 1);
 
     }
 

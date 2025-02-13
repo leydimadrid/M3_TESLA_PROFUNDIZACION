@@ -62,8 +62,8 @@ namespace TeslaACDC.API.Controllers
         [Route("Delete/{id}")]
         public async Task<IActionResult> DeleteSong(int id)
         {
-            await _songService.DeleteSong(id);
-            return NoContent();
+           var deleteSong = await _songService.DeleteSong(id);
+            return Ok(deleteSong);
         }
 
     }

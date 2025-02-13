@@ -59,7 +59,7 @@ public class ArtistController : ControllerBase
     [Route("Delete/{id}")]
     public async Task<IActionResult> DeleteArtist(int id)
     {
-        await _artistService.DeleteArtist(id);
-        return NoContent();
+        var deleteArtist = await _artistService.DeleteArtist(id);
+        return Ok(deleteArtist);
     }
 }

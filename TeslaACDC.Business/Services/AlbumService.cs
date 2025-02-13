@@ -1,26 +1,26 @@
 using System.Net;
 using TeslaACDC.Business.Interfaces;
-using TeslaACDC.Data.IRepository;
+using TeslaACDC.Data;
 using TeslaACDC.Data.Models;
 
 namespace TeslaACDC.Business.Services;
 
 public class AlbumService : IAlbumService
 {
-    private IAlbumRepository<int, Album> _albumRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AlbumService(IAlbumRepository<int, Album> albumRepository)
+    public AlbumService(IUnitOfWork unitOfWork)
     {
-        _albumRepository = albumRepository;
+        _unitOfWork = unitOfWork;
     }
 
 
     public async Task<BaseMessage<Album>> GetAllAlbums()
     {
-        var lista = await _albumRepository.GetAllAlbums();
+        var lista = await _unitOfWork.AlbumRepository.GetAllAsync();
         return lista.Any()
-            ? BuildMessage(lista, "", HttpStatusCode.OK, lista.Count)
-            : BuildMessage(lista, "", HttpStatusCode.NotFound, 0);
+            ? BuildMessage(lista.ToList(), "", HttpStatusCode.OK, lista.Count())
+            : BuildMessage(lista.ToList(), "", HttpStatusCode.NotFound, 0);
     }
 
     public async Task<BaseMessage<Album>> AddAlbum(Album album)
@@ -31,15 +31,16 @@ public class AlbumService : IAlbumService
             return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
         }
 
-        var addAlbum = await _albumRepository.AddAlbum(album);
-        return addAlbum != null
+        await _unitOfWork.AlbumRepository.AddAsync(album);
+        await _unitOfWork.SaveAsync();
+        return album != null
             ? BuildMessage(new List<Album> { album }, "Álbum agregado exitosamente.", HttpStatusCode.OK, 1)
             : BuildMessage(new List<Album>(), "", HttpStatusCode.InternalServerError, 0);
     }
 
     public async Task<BaseMessage<Album>> FindAlbumById(int id)
     {
-        var album = await _albumRepository.FindAlbumById(id);
+        var album = await _unitOfWork.AlbumRepository.FindAsync(id);
         return album == null
             ? BuildMessage(new List<Album>(), "", HttpStatusCode.NotFound, 0)
             : BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1);
@@ -47,10 +48,10 @@ public class AlbumService : IAlbumService
 
     public async Task<BaseMessage<Album>> FindAlbumByName(string name)
     {
-        var album = await _albumRepository.FindAlbumByName(name);
-        return album.Any()
-            ? BuildMessage(album, "", HttpStatusCode.OK, album.Count())
-            : BuildMessage(album, "", HttpStatusCode.NotFound, 0);
+        var lista = await _unitOfWork.AlbumRepository.GetAllAsync(x => x.Name.ToLower().Contains(name.ToLower()));
+        return lista.Any()
+            ? BuildMessage(lista.ToList(), "", HttpStatusCode.OK, lista.Count())
+            : BuildMessage(lista.ToList(), "", HttpStatusCode.NotFound, 0);
     }
 
     public async Task<BaseMessage<Album>> FindAlbumByRange(int year1, int year2)
@@ -62,33 +63,42 @@ public class AlbumService : IAlbumService
             return BuildMessage(null, string.Join("\n", error), HttpStatusCode.BadRequest, 0);
         }
 
-        var album = await _albumRepository.FindAlbumByRange(year1, year2);
-        return BuildMessage(album, "", HttpStatusCode.OK, album.Count());
+        var album = await _unitOfWork.AlbumRepository.GetAllAsync(album => album.Year >= year1 && album.Year <= year2);
+        return BuildMessage(album.ToList(), "", HttpStatusCode.OK, album.Count());
     }
 
     public async Task<BaseMessage<Album>> UpdateAlbum(int id, Album album)
     {
 
-        var albumEntity = await _albumRepository.FindAlbumById(id);
+        var albumEntity = await _unitOfWork.AlbumRepository.FindAsync(id);
+        if (albumEntity == null)
+        {
+            return BuildMessage(new List<Album>(), "Álbum no encontrado", HttpStatusCode.NotFound, 0);
+        }
+
         albumEntity.Name = album.Name;
         albumEntity.Year = album.Year;
         albumEntity.ArtistId = album.ArtistId;
         albumEntity.Artist = album.Artist;
         albumEntity.Genre = album.Genre;
-        return albumEntity == null
-            ? BuildMessage(new List<Album>(), "Álbum no encontrado", HttpStatusCode.NotFound, 0)
-            : await _albumRepository.UpdateAlbum(albumEntity)
-                .ContinueWith(_ => BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1));
+
+        _unitOfWork.AlbumRepository.Update(albumEntity);
+        await _unitOfWork.SaveAsync();
+        return BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1);
 
     }
 
     public async Task<BaseMessage<Album>> DeleteAlbum(int id)
     {
-        var album = await _albumRepository.FindAlbumById(id);
-        return album == null
-            ? BuildMessage(new List<Album>(), "Álbum no encontrado", HttpStatusCode.InternalServerError, 0)
-            : await _albumRepository.DeleteAlbum(album)
-                .ContinueWith(_ => BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1));
+        var album = await _unitOfWork.AlbumRepository.FindAsync(id);
+        if (album == null)
+        {
+            return BuildMessage(new List<Album>(), "Álbum no encontrado", HttpStatusCode.NotFound, 0);
+        }
+
+        _unitOfWork.AlbumRepository.Delete(album);
+        await _unitOfWork.SaveAsync();
+        return BuildMessage(new List<Album> { album }, "", HttpStatusCode.OK, 1);
     }
 
     private BaseMessage<Album> BuildMessage(List<Album> responseElements, string message = "", HttpStatusCode

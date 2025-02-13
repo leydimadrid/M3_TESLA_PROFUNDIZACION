@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj": {}
+    "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj": {}
   },
   "projects": {
-    "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj": {
+    "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj",
+        "projectUniqueName": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj",
         "projectName": "TeslaACDC.API",
-        "projectPath": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj",
+        "projectPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj",
         "packagesPath": "C:\\Users\\Janus\\.nuget\\packages\\",
-        "outputPath": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\obj\\",
+        "outputPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj": {
-                "projectPath": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj"
+              "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj": {
+                "projectPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj"
               },
               "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Data\\TeslaACDC.Data.csproj": {
                 "projectPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Data\\TeslaACDC.Data.csproj"
@@ -101,18 +101,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj": {
+    "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj",
+        "projectUniqueName": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj",
         "projectName": "TeslaACDC.Business",
-        "projectPath": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj",
+        "projectPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\TeslaACDC.Business.csproj",
         "packagesPath": "C:\\Users\\Janus\\.nuget\\packages\\",
-        "outputPath": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\obj\\",
+        "outputPath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -170,7 +170,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -247,7 +247,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

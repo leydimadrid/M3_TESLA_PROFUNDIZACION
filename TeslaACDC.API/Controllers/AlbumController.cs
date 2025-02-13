@@ -70,8 +70,8 @@ public class AlbumController : ControllerBase
     [Route("Delete/{id}")]
     public async Task<IActionResult> DeleteAlbum(int id)
     {
-        await _albumService.DeleteAlbum(id);
-        return NoContent();
+        var deleteAlbum = await _albumService.DeleteAlbum(id);
+        return Ok(deleteAlbum);
     }
 
 

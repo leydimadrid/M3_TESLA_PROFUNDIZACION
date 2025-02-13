@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+aglw/BpcG4=",
+  "dgSpecHash": "JpJOwXw559k=",
   "success": true,
-  "projectFilePath": "c:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj",
+  "projectFilePath": "C:\\M3_TESLA_PROFUNDIZACION\\TeslaACDC.API\\TeslaACDC.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Janus\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Janus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
