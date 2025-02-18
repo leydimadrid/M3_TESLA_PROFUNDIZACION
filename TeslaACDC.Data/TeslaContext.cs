@@ -1,10 +1,11 @@
 using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TeslaACDC.Data.Models;
 
 namespace TeslaACDC.Data;
 
-public class TeslaContext : DbContext
+public class TeslaContext : IdentityDbContext<ApplicationUser>
 {
     public TeslaContext(DbContextOptions<TeslaContext> options) : base(options)
     {
