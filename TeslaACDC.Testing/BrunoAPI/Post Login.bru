@@ -1,0 +1,18 @@
+meta {
+  name: Post Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:5046/api/authenticate/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "UserName": "Leydi",
+    "Password": "Saroma2025$"
+  }
+}

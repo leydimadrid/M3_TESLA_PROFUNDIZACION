@@ -111,7 +111,7 @@ public class UserService : IUserService
         await RegisterAdmin(new RegisterModel()
         {
             Email = "leydi@gmail.com",
-            Password = "Saromatic",
+            Password = "Saroma2025$",
             UserName = "Leydi"
         });
     }

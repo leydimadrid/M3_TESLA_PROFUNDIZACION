@@ -243,3 +243,13 @@ C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\ru\Microsoft.CodeAnaly
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\microsoft.identitymodel.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\M3_TESLA_PROFUNDIZACION\TeslaACDC.API\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

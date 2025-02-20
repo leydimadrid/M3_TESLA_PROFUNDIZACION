@@ -25,5 +25,6 @@ public class TeslaContext : IdentityDbContext<ApplicationUser>
         builder.Entity<Album>().ToTable("album").HasKey(k => k.Id);
         builder.Entity<Artist>().ToTable("artist").HasKey(k => k.Id);
         builder.Entity<Song>().ToTable("songs").HasKey(k => k.Id);
+        base.OnModelCreating(builder);
     }
 }

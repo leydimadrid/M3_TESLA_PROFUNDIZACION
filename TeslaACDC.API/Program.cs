@@ -54,7 +54,7 @@ builder.Services.AddDbContext<TeslaContext>(
 );
 
 var app = builder.Build();
-PopulateDB(app);
+// PopulateDB(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -89,7 +89,7 @@ app.Run();
 #region PopulateDB
 async void PopulateDB(WebApplication app)
 {
-    using(var scope = app.Services.CreateScope())
+    using (var scope = app.Services.CreateScope())
     {
         var seedMain = scope.ServiceProvider.GetRequiredService<IUserService>();
         await seedMain.SeedAdmin();
